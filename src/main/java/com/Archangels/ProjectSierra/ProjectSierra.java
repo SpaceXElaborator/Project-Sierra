@@ -1,15 +1,17 @@
 package com.Archangels.ProjectSierra;
 
-import javax.swing.JFrame;
+import com.Archangels.ProjectSierra.Window.GameLauncher;
 
 public class ProjectSierra {
 
+	private static GameLauncher launch;
+	
 	public static void main(String[] args) {
-		JFrame test = new JFrame("Example JFrame");
-		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		test.setLocationRelativeTo(null);
-		test.setResizable(false);
-		test.setSize(800, 800);
+		launch = new GameLauncher();
+	}
+	
+	public static GameLauncher getLauncher() {
+		return launch;
 	}
 	
 }
