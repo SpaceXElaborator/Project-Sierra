@@ -21,13 +21,22 @@ public class GameKeyListener extends KeyAdapter {
 			Controllable ent = (Controllable) handler.getControlledEntity();
 			
 			if(key == KeyEvent.VK_RIGHT) {
-				ent.setDirection(Direction.RIGHT);
-				ent.getVelocity().setX(ent.getMoveSpeed());
+				if(!ent.isJumping()) {
+					ent.setDirection(Direction.RIGHT);
+					ent.getVelocity().setX(ent.getMoveSpeed());
+				}
 			}
 			
 			if(key == KeyEvent.VK_LEFT) {
-				ent.setDirection(Direction.LEFT);
-				ent.getVelocity().setX(-ent.getMoveSpeed());
+				if(!ent.isJumping()) {
+					ent.setDirection(Direction.LEFT);
+					ent.getVelocity().setX(-ent.getMoveSpeed());
+				}
+			}
+			
+			if(key == KeyEvent.VK_SPACE) {
+				ent.setJumping(true);
+				ent.getVelocity().setY(-15);
 			}
 			
 //			if(key == KeyEvent.VK_X) {
@@ -46,12 +55,13 @@ public class GameKeyListener extends KeyAdapter {
 			Controllable ent = (Controllable) handler.getControlledEntity();
 			
 			if(key == KeyEvent.VK_RIGHT) {
-				ent.getVelocity().setX(0);
-				
+				if(!ent.isJumping())
+					ent.getVelocity().setX(0);
 			}
 			
 			if(key==KeyEvent.VK_LEFT) {
-				ent.getVelocity().setX(0);
+				if(!ent.isJumping())
+					ent.getVelocity().setX(0);
 			}
 		}
 	}
