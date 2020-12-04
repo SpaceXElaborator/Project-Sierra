@@ -1,13 +1,15 @@
 package com.Archangels.ProjectSierra.Util;
 
-public class Direction {
+public class Velocity {
 
 	private double dx;
 	private double dy;
+	private Direction dir;
 	
-	public Direction(double dx, double dy) {
+	public Velocity(double dx, double dy) {
 		this.dx = dx;
 		this.dy = dy;
+		dir = null;
 	}
 	
 	public double getX() {
@@ -24,6 +26,14 @@ public class Direction {
 	
 	public void setY(double y) {
 		this.dy = y;
+	}
+	
+	public Direction getDirection() {
+		return dir;
+	}
+	
+	public void setDirection(Direction dir) {
+		this.dir = dir;
 	}
 	
 }

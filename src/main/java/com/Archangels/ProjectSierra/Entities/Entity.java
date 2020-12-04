@@ -3,18 +3,18 @@ package com.Archangels.ProjectSierra.Entities;
 import javax.swing.ImageIcon;
 
 import com.Archangels.ProjectSierra.Engine.GameElement;
-import com.Archangels.ProjectSierra.Util.Direction;
+import com.Archangels.ProjectSierra.Util.Velocity;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public abstract class Entity implements GameElement {
 
 	private Location loc;
-	private Direction dir;
+	private Velocity dir;
 	private ImageIcon i;
 	
 	public Entity(Location loc) {
 		this.loc = loc;
-		this.dir = new Direction(0, 0);
+		this.dir = new Velocity(0, 0);
 	}
 	
 	public void setTexture(ImageIcon i) {
@@ -33,7 +33,7 @@ public abstract class Entity implements GameElement {
 		return this.loc;
 	}
 	
-	public Direction getDirection() {
+	public Velocity getVelocity() {
 		return dir;
 	}
 	
