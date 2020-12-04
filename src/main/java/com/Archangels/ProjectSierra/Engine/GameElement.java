@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 public interface GameElement {
 
-	public void update(double elapsed);
+	public void update();
 	public void render(Graphics g);
 	
 }
