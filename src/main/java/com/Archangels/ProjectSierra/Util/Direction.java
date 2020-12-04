@@ -18,4 +18,12 @@ public class Direction {
 		return dy;
 	}
 	
+	public void setX(double x) {
+		this.dx = x;
+	}
+	
+	public void setY(double y) {
+		this.dy = y;
+	}
+	
 }
