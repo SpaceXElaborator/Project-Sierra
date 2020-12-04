@@ -2,7 +2,7 @@ package com.Archangels.ProjectSierra.Entities.Player;
 
 public enum Classes {
 
-	KNIGHT("Knight", "../Images/knight.png");
+	KNIGHT("Knight", "Images/CharacterImages/knight.png");
 
 	private String name;
 	private String image;
