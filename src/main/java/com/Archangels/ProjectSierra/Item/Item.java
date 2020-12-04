@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import com.Archangels.ProjectSierra.Engine.GameElement;
 
 public abstract class Item implements GameElement {
+	
 	private String name;
 	private ImageIcon texture;
 
