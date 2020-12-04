@@ -5,12 +5,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import javax.swing.ImageIcon;
-
 import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Engine.GameLoop;
 import com.Archangels.ProjectSierra.Engine.Handler;
-import com.Archangels.ProjectSierra.Entities.Player;
+import com.Archangels.ProjectSierra.Entities.EntityPlayer;
+import com.Archangels.ProjectSierra.Entities.Player.Classes;
 import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 
@@ -21,9 +20,9 @@ public class GamePanel extends GameLoop {
 	
 	public GamePanel() {
 		setPreferredSize(new Dimension(1280, 720));
-		
-		Player p = new Player(new Location(200, 200), new ImageIcon(getClass().getResource("../Images/Untitled-1.png")));
-		p.getVelocity().setDirection(Direction.RIGHT);
+
+		EntityPlayer p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
+		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
 		new Thread(this).start();
