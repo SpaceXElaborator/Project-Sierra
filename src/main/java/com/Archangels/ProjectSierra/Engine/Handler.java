@@ -57,4 +57,8 @@ public class Handler {
 		return focus;
 	}
 	
+	public LinkedList<GameElement> getGameElements() {
+		return objects;
+	}
+	
 }
