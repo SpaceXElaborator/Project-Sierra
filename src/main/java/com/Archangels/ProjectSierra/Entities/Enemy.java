@@ -1,10 +1,14 @@
 package com.Archangels.ProjectSierra.Entities;
 
-public interface Enemy {
+import com.Archangels.ProjectSierra.Util.Location;
 
-	/*
-	 * 
-	 */
-	public void setTexture();
+public abstract class Enemy extends Entity {
+
+	public Enemy(Location loc) {
+		super(loc);
+	}
+	
+	public abstract void setTarget(Player p);
+	public abstract Player getTarget();
 	
 }
