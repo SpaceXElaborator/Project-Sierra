@@ -11,6 +11,7 @@ import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Engine.GameLoop;
 import com.Archangels.ProjectSierra.Engine.Handler;
 import com.Archangels.ProjectSierra.Entities.Player;
+import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public class GamePanel extends GameLoop {
@@ -22,6 +23,7 @@ public class GamePanel extends GameLoop {
 		setPreferredSize(new Dimension(1280, 720));
 		
 		Player p = new Player(new Location(200, 200), new ImageIcon(getClass().getResource("../Images/Untitled-1.png")));
+		p.getVelocity().setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
 		new Thread(this).start();
