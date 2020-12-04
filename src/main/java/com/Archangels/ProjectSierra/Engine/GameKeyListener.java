@@ -4,6 +4,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import com.Archangels.ProjectSierra.Entities.Controllable;
+import com.Archangels.ProjectSierra.Entities.EntityPlayer;
 import com.Archangels.ProjectSierra.Util.Direction;
 
 public class GameKeyListener extends KeyAdapter {
@@ -35,16 +36,18 @@ public class GameKeyListener extends KeyAdapter {
 			}
 			
 			if(key == KeyEvent.VK_SPACE) {
-				ent.setJumping(true);
-				ent.getVelocity().setY(-15);
+				if(!ent.isJumping()) {
+					ent.setJumping(true);
+					ent.getVelocity().setY(-15);
+				}
 			}
 			
-//			if(key == KeyEvent.VK_X) {
-//				if(ent instanceof Player) {
-//					Player p = (Player)ent;
-//					p.teleport();
-//				}
-//			}
+			if(key == KeyEvent.VK_X) {
+				if(ent instanceof  EntityPlayer) {
+					EntityPlayer p = (EntityPlayer)ent;
+					p.teleport();
+				}
+			}
 		}
 	}
 	
