@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.IOException;
 
 import com.Archangels.ProjectSierra.ProjectSierra;
+import com.Archangels.ProjectSierra.Block.BasicGround;
 import com.Archangels.ProjectSierra.Engine.GameLoop;
 import com.Archangels.ProjectSierra.Engine.Handler;
 import com.Archangels.ProjectSierra.Entities.EntityPlayer;
@@ -21,11 +23,22 @@ public class GamePanel extends GameLoop {
 	public GamePanel() {
 		setPreferredSize(new Dimension(1280, 720));
 
-		EntityPlayer p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
+		EntityPlayer p = null;
+		
+		try {
+			p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
 		new Thread(this).start();
+		
+		for(int i = 0; i < 1320; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(i, 720-40)));
+		}
 		
 		this.setFocusTraversalKeysEnabled(false);
 	}
