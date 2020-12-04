@@ -4,7 +4,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import com.Archangels.ProjectSierra.Entities.Controllable;
-import com.Archangels.ProjectSierra.Entities.Entity;
 import com.Archangels.ProjectSierra.Util.Direction;
 
 public class GameKeyListener extends KeyAdapter {
@@ -14,20 +13,21 @@ public class GameKeyListener extends KeyAdapter {
 	public GameKeyListener(Handler handler) {
 		this.handler = handler;
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(handler.getControlledEntity() != null) {
 			Controllable ent = (Controllable) handler.getControlledEntity();
+			
 			if(key == KeyEvent.VK_RIGHT) {
-				ent.getVelocity().setDirection(Direction.RIGHT);
-				ent.getVelocity().setX(5);
+				ent.setDirection(Direction.RIGHT);
+				ent.getVelocity().setX(ent.getMoveSpeed());
 			}
 			
 			if(key == KeyEvent.VK_LEFT) {
-				ent.getVelocity().setDirection(Direction.LEFT);
-				ent.getVelocity().setX(-5);
+				ent.setDirection(Direction.LEFT);
+				ent.getVelocity().setX(-ent.getMoveSpeed());
 			}
 			
 //			if(key == KeyEvent.VK_X) {
@@ -43,7 +43,8 @@ public class GameKeyListener extends KeyAdapter {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(handler.getControlledEntity() != null) {
-			Entity ent = (Entity) handler.getControlledEntity();
+			Controllable ent = (Controllable) handler.getControlledEntity();
+			
 			if(key == KeyEvent.VK_RIGHT) {
 				ent.getVelocity().setX(0);
 				
