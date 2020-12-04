@@ -15,6 +15,7 @@ public abstract class Entity implements GameElement {
 	public Entity(Location loc) {
 		this.loc = loc;
 		this.dir = new Velocity(0, 0);
+		createCollisionBox();
 	}
 	
 	public void setTexture(ImageIcon i) {
@@ -36,5 +37,7 @@ public abstract class Entity implements GameElement {
 	public Velocity getVelocity() {
 		return dir;
 	}
+	
+	public abstract void createCollisionBox();
 	
 }
