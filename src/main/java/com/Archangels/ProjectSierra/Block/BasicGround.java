@@ -26,10 +26,8 @@ public class BasicGround implements GameElement {
 		return collision;
 	}
 	
-	@Override
 	public void update() {}
 	
-	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.RED);
 		Graphics2D g2d = (Graphics2D)g;
