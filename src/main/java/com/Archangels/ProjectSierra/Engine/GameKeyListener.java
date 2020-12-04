@@ -4,6 +4,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import com.Archangels.ProjectSierra.Entities.Entity;
+import com.Archangels.ProjectSierra.Entities.Player;
+import com.Archangels.ProjectSierra.Util.Direction;
 
 public class GameKeyListener extends KeyAdapter {
 
@@ -17,13 +19,19 @@ public class GameKeyListener extends KeyAdapter {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if(handler.getControlledEntity() != null) {
-			Entity ent = (Entity) handler.getControlledEntity();
+			Player ent = (Player) handler.getControlledEntity();
 			if(key == KeyEvent.VK_RIGHT) {
-				ent.getDirection().setX(5);
+				ent.getVelocity().setDirection(Direction.RIGHT);
+				ent.getVelocity().setX(5);
 			}
 			
 			if(key == KeyEvent.VK_LEFT) {
-				ent.getDirection().setX(-5);
+				ent.getVelocity().setDirection(Direction.LEFT);
+				ent.getVelocity().setX(-5);
+			}
+			
+			if(key == KeyEvent.VK_X) {
+				ent.teleport();
 			}
 		}
 	}
@@ -34,11 +42,12 @@ public class GameKeyListener extends KeyAdapter {
 		if(handler.getControlledEntity() != null) {
 			Entity ent = (Entity) handler.getControlledEntity();
 			if(key == KeyEvent.VK_RIGHT) {
-				ent.getDirection().setX(0);
+				ent.getVelocity().setX(0);
+				
 			}
 			
 			if(key==KeyEvent.VK_LEFT) {
-				ent.getDirection().setX(0);
+				ent.getVelocity().setX(0);
 			}
 		}
 	}
