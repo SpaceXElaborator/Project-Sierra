@@ -34,6 +34,7 @@ public abstract class GameLoop extends JPanel implements Runnable {
 			}
 			repaint();
 			frames++;
+			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("FPS: " + frames + " TICKS: " + updates);
@@ -49,6 +50,7 @@ public abstract class GameLoop extends JPanel implements Runnable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		render(g);
+		g.dispose();
 	}
 	
 	public abstract void render(Graphics g);
