@@ -25,9 +25,6 @@ public class StartMenu extends JPanel {
 		// Placeholders for our initial screen buttons
 		JPanel start = new JPanel(), exit = new JPanel();
 		
-		//JButton start = new JButton("Start");
-		//JButton exit = new JButton("Exit Game");
-		
 		// Stylize and place buttons
 		start.setBounds(465, 360, 350, 100);
 		JLabel startText = new JLabel("Start");
