@@ -8,7 +8,7 @@ public abstract class Enemy extends Entity {
 		super(loc);
 	}
 	
-	public abstract void setTarget(Player p);
-	public abstract Player getTarget();
+	public abstract void setTarget(EntityPlayer p);
+	public abstract EntityPlayer getTarget();
 	
 }
