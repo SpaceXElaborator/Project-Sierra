@@ -36,9 +36,36 @@ public class GamePanel extends GameLoop {
 		handler.setControlledEntity(p);
 		new Thread(this).start();
 		
-		for(int i = 0; i < 1320; i += 40) {
-			handler.addGameElement(new BasicGround(new Location(i, 720-40)));
+		for(int i = 0; i < 1240; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(i, 680)));
 		}
+		
+		for(int i = 0; i < 700; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(0, i)));
+		}
+		
+		for(int i = 0; i < 700; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(1240, i)));
+		}
+		
+		for(int i = 520; i < 700; i += 40) {
+		handler.addGameElement(new BasicGround(new Location(40, i)));
+		}
+		
+		for(int i = 520; i < 700; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(80, i)));
+		}
+		
+		for(int i = 520; i < 700; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(120, i)));
+		}
+		
+		handler.addGameElement(new BasicGround(new Location(280, 520)));
+		
+		handler.addGameElement(new BasicGround(new Location(40, 320)));
+			
+			
+		
 		
 		this.setFocusTraversalKeysEnabled(false);
 	}
