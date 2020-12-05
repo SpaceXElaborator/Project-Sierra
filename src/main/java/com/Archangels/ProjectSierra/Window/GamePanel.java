@@ -35,34 +35,55 @@ public class GamePanel extends GameLoop {
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
 		new Thread(this).start();
-		
+		///Floor
 		for(int i = 0; i < 1240; i += 40) {
 			handler.addGameElement(new BasicGround(new Location(i, 680)));
 		}
-		
+		//Left wall
 		for(int i = 0; i < 700; i += 40) {
 			handler.addGameElement(new BasicGround(new Location(0, i)));
 		}
-		
+		//Right Wall
 		for(int i = 0; i < 700; i += 40) {
 			handler.addGameElement(new BasicGround(new Location(1240, i)));
 		}
-		
+		//Far-Left Column
 		for(int i = 520; i < 700; i += 40) {
 		handler.addGameElement(new BasicGround(new Location(40, i)));
 		}
-		
-		for(int i = 520; i < 700; i += 40) {
+		//Left-Middle column
+		for(int i = 560; i < 700; i += 40) {
 			handler.addGameElement(new BasicGround(new Location(80, i)));
 		}
-		
-		for(int i = 520; i < 700; i += 40) {
+		//Right-middle column 
+		for(int i = 600; i < 700; i += 40) {
 			handler.addGameElement(new BasicGround(new Location(120, i)));
 		}
 		
-		handler.addGameElement(new BasicGround(new Location(280, 520)));
+		//Far right column
+		for(int i = 640; i < 700; i += 40) {
+			handler.addGameElement(new BasicGround(new Location(160, i)));
+		}
 		
+		//Hanging single block on left wall
 		handler.addGameElement(new BasicGround(new Location(40, 320)));
+		
+		//Middle left platform
+		for(int i = 280; i < 400 ; i+=40) {
+		handler.addGameElement(new BasicGround(new Location(i, 400)));
+		}
+		
+		//Middle top platform 
+		for(int i = 540; i < 660 ; i+=40) {
+			handler.addGameElement(new BasicGround(new Location(i, 200)));
+			}
+		
+		
+		for(int i = 900; i < 1020 ; i+=40) {
+			handler.addGameElement(new BasicGround(new Location(i, 400)));
+			}
+		
+		
 			
 			
 		
