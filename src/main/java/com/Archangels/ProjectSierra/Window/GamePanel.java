@@ -40,6 +40,7 @@ public class GamePanel extends GameLoop {
 			e.printStackTrace();
 		}
 		handler.setCamera(p.getCamera());
+		handler.setPlayArea(new PlayArea(p));
 
 		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
