@@ -28,7 +28,6 @@ public class DefaultKeyBindings {
 	Action moveLeft() {
 		return new AbstractAction() {
 			private static final long serialVersionUID = -1;
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
@@ -42,7 +41,6 @@ public class DefaultKeyBindings {
 	Action moveRight() {
 		return new AbstractAction() {
 			private static final long serialVersionUID = -1;
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
@@ -56,7 +54,6 @@ public class DefaultKeyBindings {
 	Action stopRight() {
 		return new AbstractAction() {
 			private static final long serialVersionUID = -1;
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
@@ -70,7 +67,6 @@ public class DefaultKeyBindings {
 	Action stopLeft() {
 		return new AbstractAction() {
 			private static final long serialVersionUID = -1;
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
@@ -84,7 +80,6 @@ public class DefaultKeyBindings {
 	Action jump() {
 		return new AbstractAction() {
 			private static final long serialVersionUID = -1;
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
