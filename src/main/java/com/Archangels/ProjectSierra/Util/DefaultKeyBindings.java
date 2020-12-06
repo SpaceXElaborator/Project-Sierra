@@ -22,6 +22,7 @@ public class DefaultKeyBindings {
 		kb.addKeyBinding("D", moveRight());
 		kb.addKeyBinding("released A", stopLeft());
 		kb.addKeyBinding("released D", stopRight());
+		kb.addKeyBinding("space", jump());
 	}
 	
 	Action moveLeft() {
@@ -75,6 +76,20 @@ public class DefaultKeyBindings {
 					Controllable con = (Controllable)handler.getControlledEntity();
 					if(con.getVelocity().getX() > 0) return;
 					con.getVelocity().setX(0);
+				}
+			}
+		};
+	}
+	
+	Action jump() {
+		return new AbstractAction() {
+			private static final long serialVersionUID = -1;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(handler.getControlledEntity() != null) {
+					Controllable con = (Controllable)handler.getControlledEntity();
+					con.setJumping(true);
+					con.getVelocity().setY(-15);
 				}
 			}
 		};
