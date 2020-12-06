@@ -10,22 +10,34 @@ public class Handler {
 	private LinkedList<GameElement> objects = new LinkedList<GameElement>();
 	private LinkedList<GameElement> controls = new LinkedList<GameElement>();
 	private GameElement focus = null;
+	private Camera cam = null;
 	
 	public void update() {
+		if(cam != null) {
+			cam.update();
+		}
+		
 		for(GameElement gh : controls) {
 			gh.update();
 		}
+		
 		for(GameElement gh : objects) {
 			gh.update();
 		}
 	}
 	
 	public void render(Graphics g) {
-		for(GameElement gh : controls) {
-			gh.render(g);
-		}
-		for(GameElement gh : objects) {
-			gh.render(g);
+		if(cam != null) {
+			for(GameElement gh : controls) {
+				gh.render(g);
+			}
+			for(GameElement gh : objects) {
+				//Location loc = gh.getLocation();
+				//Location camLocTop = cam.getTopBounds();
+				//Location camLocBottom = cam.getBottomBounds();
+				
+				gh.render(g);
+			}
 		}
 	}
 	
@@ -51,6 +63,14 @@ public class Handler {
 		} else {
 			throw new IllegalArgumentException();
 		}
+	}
+	
+	public void setCamera(Camera cam) {
+		this.cam = cam;
+	}
+	
+	public Camera getCamera() {
+		return this.cam;
 	}
 	
 	public GameElement getControlledEntity() {

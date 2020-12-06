@@ -84,7 +84,6 @@ public class DefaultKeyBindings {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
 					if(con.isJumping()) return;
-					System.out.println(con.isFalling());
 					if(con.isFalling()) return;
 					con.setJumping(true);
 					con.getVelocity().setY(-15);

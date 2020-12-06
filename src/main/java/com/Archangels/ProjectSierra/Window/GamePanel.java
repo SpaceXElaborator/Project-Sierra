@@ -39,6 +39,7 @@ public class GamePanel extends GameLoop {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		handler.setCamera(p.getCamera());
 
 		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
@@ -66,8 +67,10 @@ public class GamePanel extends GameLoop {
 		test.drawRect(0, 0, 1280, 720);
 
 		// Everything else
+		test.translate(handler.getCamera().getLocation().getX(), handler.getCamera().getLocation().getY());
 		handler.render(g);
-
+		test.translate(-handler.getCamera().getLocation().getX(), -handler.getCamera().getLocation().getY());
+		
 		test.dispose();
 	}
 	
