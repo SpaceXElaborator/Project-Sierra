@@ -3,8 +3,8 @@ package com.Archangels.ProjectSierra.Window;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import com.Archangels.ProjectSierra.Engine.GameKeyListener;
 import com.Archangels.ProjectSierra.Engine.Handler;
+import com.Archangels.ProjectSierra.Util.DefaultKeyBindings;
 
 // Main game window (Main Menu. Will make the Exit and Start Game button)
 public class GameLauncher extends JFrame {
@@ -16,12 +16,11 @@ public class GameLauncher extends JFrame {
 	
 	public GameLauncher() {
 		handler = new Handler();
+		new DefaultKeyBindings(handler);
 		setTitle("Project Sierra");
 		
 		if(panel == null) panel = new StartMenu(1280, 720);
 		setContentPane(panel);
-		
-		addKeyListener(new GameKeyListener(handler));
 		
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
