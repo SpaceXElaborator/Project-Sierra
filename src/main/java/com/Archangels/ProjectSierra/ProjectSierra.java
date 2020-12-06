@@ -1,22 +1,30 @@
 package com.Archangels.ProjectSierra;
 
+import com.Archangels.ProjectSierra.Engine.KeyBindings;
 import com.Archangels.ProjectSierra.Window.GameLauncher;
 
 public class ProjectSierra {
 
 	private static GameLauncher launch;
 	private static boolean debug = false;
+	private static KeyBindings bindings;
 	
 	public static void main(String[] args) {
 		if(args.length > 0) {
-			if(args[0].equalsIgnoreCase("--debug")) debug = true;
+			for(String s : args) {
+				if(s.equalsIgnoreCase("--debug")) debug = true;
+			}
 		}
-		
+		bindings = new KeyBindings();
 		launch = new GameLauncher();
 	}
 	
 	public static GameLauncher getLauncher() {
 		return launch;
+	}
+	
+	public static KeyBindings getKeyBindings() {
+		return bindings;
 	}
 	
 	public static boolean isDebug() {
