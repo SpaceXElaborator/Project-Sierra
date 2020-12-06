@@ -50,7 +50,7 @@ public class GamePanel extends GameLoop {
 		// Level
 		new TestLevel(handler);
 
-		this.setFocusTraversalKeysEnabled(false);
+		setFocusTraversalKeysEnabled(false);
 	}
 
 	@Override
