@@ -92,20 +92,18 @@ public abstract class Entity implements GameElement {
 				ge = (BasicGround)ge;
 				
 				if(getCollisionBox().getBoundsLeft().intersects(((BasicGround) ge).getCollision())) {
-					getVelocity().setX(0);
+					//getVelocity().setX(0);
 					getLocation().setX(getLocation().getX() + 5);
 				}
 				
 				if(getCollisionBox().getBoundsRight().intersects(((BasicGround) ge).getCollision())) {
-					getVelocity().setX(0);
+					//getVelocity().setX(0);
 					getLocation().setX(getLocation().getX() - 5);
 				}
 				
 				if(getCollisionBox().getBoundsBottom().intersects(((BasicGround) ge).getCollision())) {
 					getLocation().setY(((BasicGround) ge).getLocation().getY() - i.getIconHeight());
 					getVelocity().setY(0);
-					if(jumping)
-						getVelocity().setX(0);
 					falling = false;
 					jumping = false;
 				} else {

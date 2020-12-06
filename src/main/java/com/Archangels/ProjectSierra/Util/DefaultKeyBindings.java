@@ -22,7 +22,7 @@ public class DefaultKeyBindings {
 		kb.addKeyBinding("D", moveRight());
 		kb.addKeyBinding("released A", stopLeft());
 		kb.addKeyBinding("released D", stopRight());
-		kb.addKeyBinding("space", jump());
+		kb.addKeyBinding("SPACE", jump());
 	}
 	
 	Action moveLeft() {
