@@ -121,6 +121,10 @@ public abstract class Entity implements GameElement {
 		return jumping;
 	}
 	
+	public boolean isFalling() {
+		return falling;
+	}
+	
 	public void setDirection(Direction dir) {
 		if(getVelocity().getDirection() == dir) return;
 		Image image = i.getImage();
