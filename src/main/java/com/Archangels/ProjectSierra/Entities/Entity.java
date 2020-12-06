@@ -66,6 +66,8 @@ public abstract class Entity implements GameElement {
 		getLocation().setX(getLocation().getX() + getVelocity().getX());
 		getLocation().setY(getLocation().getY() + getVelocity().getY());
 		
+		if(!isOnSolidBlock()) falling = true;
+		
 		if(falling || jumping) {
 			getVelocity().setY(getVelocity().getY() + gravity);
 			if(getVelocity().getY() > MAX_SPEED) getVelocity().setY(MAX_SPEED);
@@ -86,28 +88,34 @@ public abstract class Entity implements GameElement {
 		}
 	}
 	
+	private boolean isOnSolidBlock() {
+		for(GameElement ge : handler.getGameElements()) {
+			if(getCollisionBox().getBoundsBottom().intersects(((BasicGround) ge).getCollision())) {
+				getLocation().setY(((BasicGround) ge).getLocation().getY() - i.getIconHeight() + 1);
+				getVelocity().setY(0);
+				falling = false;
+				jumping = false;
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private void CheckCollision() {
 		for(GameElement ge : handler.getGameElements()) {
 			if(ge instanceof BasicGround) {
 				ge = (BasicGround)ge;
 				
 				if(getCollisionBox().getBoundsLeft().intersects(((BasicGround) ge).getCollision())) {
-					//getVelocity().setX(0);
 					getLocation().setX(getLocation().getX() + 5);
 				}
 				
 				if(getCollisionBox().getBoundsRight().intersects(((BasicGround) ge).getCollision())) {
-					//getVelocity().setX(0);
 					getLocation().setX(getLocation().getX() - 5);
 				}
 				
-				if(getCollisionBox().getBoundsBottom().intersects(((BasicGround) ge).getCollision())) {
-					getLocation().setY(((BasicGround) ge).getLocation().getY() - i.getIconHeight());
-					getVelocity().setY(0);
-					falling = false;
-					jumping = false;
-				} else {
-					falling = true;
+				if(getCollisionBox().getBoundsTop().intersects(((BasicGround) ge).getCollision())) {
+					getVelocity().setY(1);
 				}
 			}
 		}
