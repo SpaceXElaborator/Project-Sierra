@@ -33,7 +33,5 @@ public class BasicGround implements GameElement {
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.draw(collision);
 	}
-
-	
 	
 }
