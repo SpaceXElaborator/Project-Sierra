@@ -5,14 +5,20 @@ import java.awt.Graphics;
 import java.util.LinkedList;
 
 import com.Archangels.ProjectSierra.ProjectSierra;
+import com.Archangels.ProjectSierra.Engine.CameraControl.Camera;
+import com.Archangels.ProjectSierra.Engine.CameraControl.PlayArea;
 import com.Archangels.ProjectSierra.Entities.Controllable;
+import com.Archangels.ProjectSierra.Entities.Entity;
+import com.Archangels.ProjectSierra.Entities.Projectiles.Projectile;
 import com.Archangels.ProjectSierra.Util.Location;
-import com.Archangels.ProjectSierra.Window.PlayArea;
 
 public class Handler {
 
 	private LinkedList<GameElement> objects = new LinkedList<GameElement>();
 	private LinkedList<GameElement> controls = new LinkedList<GameElement>();
+	private LinkedList<GameElement> projectiles = new LinkedList<GameElement>();
+	
+	private LinkedList<GameElement> deadElements = new LinkedList<GameElement>();
 	private GameElement focus = null;
 	private Camera cam = null;
 	private PlayArea pa = null;
@@ -26,12 +32,22 @@ public class Handler {
 			pa.update();
 		}
 		
+		for(GameElement gh : projectiles) {
+			gh.update();
+		}
+		
 		for(GameElement gh : controls) {
 			gh.update();
 		}
 		
 		for(GameElement gh : objects) {
 			gh.update();
+		}
+		
+		for(GameElement ge : deadElements) {
+			if(objects.contains(ge)) objects.remove(ge);
+			if(controls.contains(ge)) objects.remove(ge);
+			if(projectiles.contains(ge)) objects.remove(ge);
 		}
 	}
 	
@@ -44,10 +60,24 @@ public class Handler {
 			}
 		}
 		
+		for(GameElement gh : projectiles) {
+			Location loc = gh.getLocation();
+			Location tl = pa.getTopBounds();
+			Location bl = pa.getBottomBounds();
+			
+			if(loc.getX() < tl.getX()) ((Entity) gh).kill();
+			if(loc.getY() < tl.getY()) ((Entity) gh).kill();
+			if(loc.getX() > bl.getX()) ((Entity) gh).kill();
+			if(loc.getY() > bl.getY()) ((Entity) gh).kill();
+			
+			gh.render(g);
+		}
+		
 		if(pa != null) {
 			for(GameElement gh : controls) {
 				gh.render(g);
 			}
+			
 			for(GameElement gh : objects) {
 				Location loc = gh.getLocation();
 				Location tl = pa.getTopBounds();
@@ -63,6 +93,10 @@ public class Handler {
 	}
 	
 	public void addGameElement(GameElement ge) {
+		if(ge instanceof Projectile) {
+			projectiles.add(ge);
+			return;
+		}
 		if(ge instanceof Controllable) {
 			controls.add(ge);
 			return;
@@ -71,6 +105,10 @@ public class Handler {
 	}
 	
 	public void removeGameElement(GameElement ge) {
+		if(ge instanceof Projectile) {
+			projectiles.remove(ge);
+			return;
+		}
 		if(ge instanceof Controllable) {
 			controls.remove(ge);
 			return;
