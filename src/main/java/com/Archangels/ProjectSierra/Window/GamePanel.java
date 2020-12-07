@@ -16,6 +16,9 @@ import javax.swing.KeyStroke;
 import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Engine.GameLoop;
 import com.Archangels.ProjectSierra.Engine.Handler;
+import com.Archangels.ProjectSierra.Engine.CameraControl.PlayArea;
+import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseEvents;
+import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseListener;
 import com.Archangels.ProjectSierra.Entities.EntityPlayer;
 import com.Archangels.ProjectSierra.Entities.Player.Classes;
 import com.Archangels.ProjectSierra.Levels.TestLevel;
@@ -26,7 +29,8 @@ public class GamePanel extends GameLoop {
 
 	private static final long serialVersionUID = -4583618417099095835L;
 	private Handler handler = ProjectSierra.getLauncher().getHandler();
-
+	private GameMouseEvents gme = new GameMouseEvents();
+	
 	public GamePanel() {
 		registerDefaultKeys();
 		setPreferredSize(new Dimension(1280, 720));
@@ -41,13 +45,14 @@ public class GamePanel extends GameLoop {
 		}
 		handler.setCamera(p.getCamera());
 		handler.setPlayArea(new PlayArea(p));
-
 		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
+		
+		addMouseMotionListener(gme);
+		addMouseListener(new GameMouseListener());
 		new Thread(this).start();
 		
-		// Level
 		new TestLevel(handler);
 
 		setFocusTraversalKeysEnabled(false);
