@@ -19,7 +19,7 @@ public class Handler {
 	private LinkedList<GameElement> projectiles = new LinkedList<GameElement>();
 	
 	private LinkedList<GameElement> deadElements = new LinkedList<GameElement>();
-	private GameElement focus = null;
+	private Controllable focus = null;
 	private Camera cam = null;
 	private PlayArea pa = null;
 	
@@ -118,7 +118,7 @@ public class Handler {
 	
 	public void setControlledEntity(GameElement ge) {
 		if(ge instanceof Controllable) {
-			focus = ge;
+			focus = (Controllable)ge;
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -136,7 +136,7 @@ public class Handler {
 		this.pa = pa;
 	}
 	
-	public GameElement getControlledEntity() {
+	public Controllable getControlledEntity() {
 		return focus;
 	}
 	
