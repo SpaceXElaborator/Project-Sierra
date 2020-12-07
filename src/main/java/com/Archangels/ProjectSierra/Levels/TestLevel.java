@@ -1,6 +1,7 @@
 package com.Archangels.ProjectSierra.Levels;
 
 import com.Archangels.ProjectSierra.Block.BasicGround;
+import com.Archangels.ProjectSierra.Block.PassableBlock;
 import com.Archangels.ProjectSierra.Engine.Handler;
 import com.Archangels.ProjectSierra.Util.Location;
 
@@ -47,7 +48,11 @@ public class TestLevel {
 
 				// Middle top platform
 				for (int i = 540; i < 660; i += 40) {
-					handler.addGameElement(new BasicGround(new Location(i, 200)));
+					handler.addGameElement(new PassableBlock(new Location(i, 200)));
+				}
+				
+				for (int i = 540; i < 660; i += 40) {
+					handler.addGameElement(new PassableBlock(new Location(i, 400)));
 				}
 
 				for (int i = 900; i < 1020; i += 40) {
