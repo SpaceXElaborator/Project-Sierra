@@ -21,6 +21,7 @@ import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseEvents;
 import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseListener;
 import com.Archangels.ProjectSierra.Entities.EntityPlayer;
 import com.Archangels.ProjectSierra.Entities.Player.Classes;
+import com.Archangels.ProjectSierra.Item.Weapons.Gun;
 import com.Archangels.ProjectSierra.Levels.TestLevel;
 import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
@@ -40,9 +41,12 @@ public class GamePanel extends GameLoop {
 
 		try {
 			p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
+			Gun g = new Gun("Gun", null);
+			p.setMainHand(g);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		handler.setCamera(p.getCamera());
 		handler.setPlayArea(new PlayArea(p));
 		p.setDirection(Direction.RIGHT);
