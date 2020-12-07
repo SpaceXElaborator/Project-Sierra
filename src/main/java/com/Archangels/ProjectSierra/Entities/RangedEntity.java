@@ -6,12 +6,13 @@ import com.Archangels.ProjectSierra.Util.Velocity;
 public class RangedEntity implements ProjectileSource {
 
 	
-	
-	public <T extends Projectile> void fireProjectile(Class<? extends T> projectile) {
+	public <T extends Projectile> void fireProjectile(T projectile) {
+		// TODO Auto-generated method stub
 		
 	}
-
-	public <T extends Projectile> void fireProjectile(Class<? extends T> projectile, Velocity dir) {
+	
+	public <T extends Projectile> void fireProjectile(T projectile, Velocity vel) {
+		// TODO Auto-generated method stub
 		
 	}
 	
