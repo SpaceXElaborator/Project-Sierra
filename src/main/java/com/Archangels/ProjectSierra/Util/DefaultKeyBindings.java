@@ -1,6 +1,7 @@
 package com.Archangels.ProjectSierra.Util;
 
 import java.awt.event.ActionEvent;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -20,6 +21,7 @@ public class DefaultKeyBindings {
 		
 		kb.addKeyBinding("A", moveLeft());
 		kb.addKeyBinding("D", moveRight());
+		kb.addKeyBinding("S", fallThrough());
 		kb.addKeyBinding("released A", stopLeft());
 		kb.addKeyBinding("released D", stopRight());
 		kb.addKeyBinding("SPACE", jump());
@@ -46,6 +48,24 @@ public class DefaultKeyBindings {
 					Controllable con = (Controllable)handler.getControlledEntity();
 					con.setDirection(Direction.RIGHT);
 					con.getVelocity().setX(con.getMoveSpeed());
+				}
+			}
+		};
+	}
+	
+	Action fallThrough() {
+		return new AbstractAction() {
+			private static final long serialVersionUID = -1;
+			public void actionPerformed(ActionEvent e) {
+				if(handler.getControlledEntity() != null) {
+					Controllable con = (Controllable)handler.getControlledEntity();
+					con.setFallingThrough(true);
+					
+					ProjectSierra.getScheduler().schedule(new Runnable() {
+						public void run() {
+							con.setFallingThrough(false);
+						}
+					}, 300, TimeUnit.MILLISECONDS);
 				}
 			}
 		};
