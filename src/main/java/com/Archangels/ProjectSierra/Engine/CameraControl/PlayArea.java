@@ -1,4 +1,4 @@
-package com.Archangels.ProjectSierra.Window;
+package com.Archangels.ProjectSierra.Engine.CameraControl;
 
 import com.Archangels.ProjectSierra.Entities.Controllable;
 import com.Archangels.ProjectSierra.Util.Location;

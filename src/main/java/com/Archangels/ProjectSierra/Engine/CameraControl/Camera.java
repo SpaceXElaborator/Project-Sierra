@@ -1,7 +1,8 @@
-package com.Archangels.ProjectSierra.Engine;
+package com.Archangels.ProjectSierra.Engine.CameraControl;
 
 import java.awt.Graphics;
 
+import com.Archangels.ProjectSierra.Engine.GameElement;
 import com.Archangels.ProjectSierra.Entities.Controllable;
 import com.Archangels.ProjectSierra.Util.Location;
 
