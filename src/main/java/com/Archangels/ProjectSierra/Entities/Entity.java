@@ -11,14 +11,15 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 import com.Archangels.ProjectSierra.ProjectSierra;
-import com.Archangels.ProjectSierra.Block.BasicGround;
+import com.Archangels.ProjectSierra.Block.Block;
 import com.Archangels.ProjectSierra.Engine.GameElement;
 import com.Archangels.ProjectSierra.Engine.Handler;
+import com.Archangels.ProjectSierra.Entities.Collision.CollisionBox;
 import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 import com.Archangels.ProjectSierra.Util.Velocity;
 
-public abstract class Entity implements GameElement {
+public class Entity implements GameElement {
 
 	private Location loc;
 	private Velocity dir;
@@ -29,9 +30,11 @@ public abstract class Entity implements GameElement {
 	
 	private boolean falling = false;
 	private boolean jumping = false;
+	private boolean fallingThrough = false;
 	
 	private CollisionBox cb;
 	private Handler handler;
+	private boolean alive;
 	
 	public Entity(Location loc, ImageIcon i) {
 		this.loc = loc;
@@ -66,7 +69,9 @@ public abstract class Entity implements GameElement {
 		getLocation().setX(getLocation().getX() + getVelocity().getX());
 		getLocation().setY(getLocation().getY() + getVelocity().getY());
 		
-		if(!isOnSolidBlock()) falling = true;
+		if(!isOnSolidBlock()) {
+			falling = true;
+		}
 		
 		if(falling || jumping) {
 			getVelocity().setY(getVelocity().getY() + gravity);
@@ -90,12 +95,20 @@ public abstract class Entity implements GameElement {
 	
 	private boolean isOnSolidBlock() {
 		for(GameElement ge : handler.getGameElements()) {
-			if(getCollisionBox().getBoundsBottom().intersects(((BasicGround) ge).getCollision())) {
-				getLocation().setY(((BasicGround) ge).getLocation().getY() - i.getIconHeight() + 1);
-				getVelocity().setY(0);
-				falling = false;
-				jumping = false;
-				return true;
+			if(ge instanceof Block) {
+				if(getCollisionBox().getBoundsBottom().intersects(((Block) ge).getCollision())) {
+					if(((Block)ge).isPassable()) {
+						if(fallingThrough) continue;
+					}
+					getLocation().setY(((Block) ge).getLocation().getY() - i.getIconHeight() + 1);
+					getVelocity().setY(0);
+					//fallingThrough = false;
+					falling = false;
+					jumping = false;
+					return true;
+				}
+			} else {
+				continue;
 			}
 		}
 		return false;
@@ -103,22 +116,28 @@ public abstract class Entity implements GameElement {
 	
 	private void CheckCollision() {
 		for(GameElement ge : handler.getGameElements()) {
-			if(ge instanceof BasicGround) {
-				ge = (BasicGround)ge;
-				
-				if(getCollisionBox().getBoundsLeft().intersects(((BasicGround) ge).getCollision())) {
-					getLocation().setX(getLocation().getX() + 5);
-				}
-				
-				if(getCollisionBox().getBoundsRight().intersects(((BasicGround) ge).getCollision())) {
-					getLocation().setX(getLocation().getX() - 5);
-				}
-				
-				if(getCollisionBox().getBoundsTop().intersects(((BasicGround) ge).getCollision())) {
-					getVelocity().setY(1);
+			if(ge instanceof Block) {
+				if(!((Block) ge).isPassable()) {
+					if(getCollisionBox().getBoundsLeft().intersects(((Block) ge).getCollision())) {
+						getLocation().setX(getLocation().getX() + 5);
+					}
+					if(getCollisionBox().getBoundsRight().intersects(((Block) ge).getCollision())) {
+						getLocation().setX(getLocation().getX() - 5);
+					}
+					if(getCollisionBox().getBoundsTop().intersects(((Block) ge).getCollision())) {
+						getVelocity().setY(1);
+					}
 				}
 			}
 		}
+	}
+	
+	public void setFallingThrough(boolean b) {
+		fallingThrough = b;
+	}
+	
+	public boolean isFallingThrough() {
+		return fallingThrough;
 	}
 	
 	public void setJumping(boolean b) {
@@ -129,14 +148,30 @@ public abstract class Entity implements GameElement {
 		return jumping;
 	}
 	
+	public void setFalling(boolean b) {
+		falling = b;
+	}
+	
 	public boolean isFalling() {
 		return falling;
+	}
+	
+	public void kill() {
+		alive = false;
+	}
+	
+	public boolean isAlive() {
+		return alive;
+	}
+	
+	public Handler getHandler() {
+		return handler;
 	}
 	
 	public void setDirection(Direction dir) {
 		if(getVelocity().getDirection() == dir) return;
 		Image image = i.getImage();
-		BufferedImage img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
+		BufferedImage img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.createGraphics();
 		g.drawImage(image, 0, 0, null);
 		g.dispose();
