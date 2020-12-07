@@ -5,10 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.Archangels.ProjectSierra.Engine.GameElement;
 import com.Archangels.ProjectSierra.Util.Location;
 
-public class BasicGround implements GameElement {
+public class BasicGround extends Block {
 
 	private Location loc;
 	private Rectangle collision;
@@ -32,6 +31,10 @@ public class BasicGround implements GameElement {
 		g.setColor(Color.RED);
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.draw(collision);
+	}
+
+	public boolean isPassable() {
+		return false;
 	}
 	
 }
