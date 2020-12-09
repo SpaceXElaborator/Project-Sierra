@@ -31,9 +31,11 @@ public abstract class GameLoop extends JPanel implements Runnable {
 				update();
 				updates++;
 				delta--;
+				repaint();
+				frames++;
 			}
-			repaint();
-			frames++;
+//			repaint();
+//			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
