@@ -30,6 +30,13 @@ public class BasicGround extends Block {
 	public void render(Graphics g) {
 		g.setColor(Color.RED);
 		Graphics2D g2d = (Graphics2D)g;
+//		BlockTextures bt = BlockTextures.valueOf("STONE");
+//		try {
+//			g2d.drawImage(ImageIO.read(ProjectSierra.class.getResource(bt.getTexture())), (int)loc.getX(), (int)loc.getY(), null);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		if(ProjectSierra.isDebug())
 		g2d.draw(collision);
 	}
 
