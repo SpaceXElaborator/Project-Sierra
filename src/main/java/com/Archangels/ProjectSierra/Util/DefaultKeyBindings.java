@@ -58,7 +58,7 @@ public class DefaultKeyBindings {
 			private static final long serialVersionUID = -1;
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
-					Controllable con = (Controllable)handler.getControlledEntity();
+					final Controllable con = (Controllable)handler.getControlledEntity();
 					con.setFallingThrough(true);
 					
 					ProjectSierra.getScheduler().schedule(new Runnable() {
