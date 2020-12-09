@@ -1,5 +1,6 @@
 package com.Archangels.ProjectSierra;
 
+import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -12,6 +13,7 @@ public class ProjectSierra {
 	private static boolean debug = false;
 	private static KeyBindings bindings;
 	private static ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+	private static ResourceBundle rb;
 	
 	public static void main(String[] args) {
 		if(args.length > 0) {
@@ -19,6 +21,7 @@ public class ProjectSierra {
 				if(s.equalsIgnoreCase("--debug")) debug = true;
 			}
 		}
+		rb = ResourceBundle.getBundle("com.Archangels.ProjectSierra.ImageBundle");
 		bindings = new KeyBindings();
 		launch = new GameLauncher();
 	}
@@ -33,6 +36,10 @@ public class ProjectSierra {
 	
 	public static ScheduledExecutorService getScheduler() {
 		return service;
+	}
+	
+	public static ResourceBundle getResources() {
+		return rb;
 	}
 	
 	public static boolean isDebug() {
