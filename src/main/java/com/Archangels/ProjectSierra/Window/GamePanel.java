@@ -80,8 +80,6 @@ public class GamePanel extends GameLoop {
 		test.translate(handler.getCamera().getLocation().getX(), handler.getCamera().getLocation().getY());
 		handler.render(g);
 		test.translate(-handler.getCamera().getLocation().getX(), -handler.getCamera().getLocation().getY());
-		
-		test.dispose();
 	}
 	
 	private void registerDefaultKeys() {
