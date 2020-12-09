@@ -13,19 +13,19 @@ public class CollisionBox {
 	}
 	
 	public Rectangle getBoundsBottom() {
-		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getIconWidth()/2) - ((e.getTexture().getIconWidth()/2)/2), (int)e.getLocation().getY() + (e.getTexture().getIconHeight()/2) + 60, e.getTexture().getIconWidth()/2, (e.getTexture().getIconHeight()/2) - 60);
+		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getWidth(null)/2) - ((e.getTexture().getWidth(null)/2)/2), (int)e.getLocation().getY() + (e.getTexture().getHeight(null)/2) + 60, e.getTexture().getWidth(null)/2, (e.getTexture().getHeight(null)/2) - 60);
 	}
 	
 	public Rectangle getBoundsTop() {
-		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getIconWidth()/2) - ((e.getTexture().getIconWidth()/2)/2), (int)e.getLocation().getY(), e.getTexture().getIconWidth()/2, e.getTexture().getIconHeight()/2);
+		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getWidth(null)/2) - ((e.getTexture().getWidth(null)/2)/2), (int)e.getLocation().getY(), e.getTexture().getWidth(null)/2, e.getTexture().getHeight(null)/2);
 	}
 	
 	public Rectangle getBoundsRight() {
-		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getIconWidth()-5) - 5, (int)e.getLocation().getY() + 5, 5, e.getTexture().getIconHeight() - 10);
+		return new Rectangle((int)e.getLocation().getX() + (e.getTexture().getWidth(null)-5) - 5, (int)e.getLocation().getY() + 5, 5, e.getTexture().getHeight(null) - 10);
 	}
 	
 	public Rectangle getBoundsLeft() {
-		return new Rectangle((int)e.getLocation().getX() + 5, (int)e.getLocation().getY() + 5, 5, e.getTexture().getIconHeight() - 10);
+		return new Rectangle((int)e.getLocation().getX() + 5, (int)e.getLocation().getY() + 5, 5, e.getTexture().getHeight(null) - 10);
 	}
 	
 }

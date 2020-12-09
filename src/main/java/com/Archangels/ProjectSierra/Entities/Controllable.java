@@ -1,6 +1,6 @@
 package com.Archangels.ProjectSierra.Entities;
 
-import javax.swing.ImageIcon;
+import java.awt.Image;
 
 import com.Archangels.ProjectSierra.Engine.CameraControl.Camera;
 import com.Archangels.ProjectSierra.Entities.Projectiles.Projectile;
@@ -15,7 +15,7 @@ public abstract class Controllable extends Entity implements ProjectileSource {
 	private Usable mainHandItem;
 	private Usable offHandItem;
 	
-	public Controllable(Location loc, ImageIcon i) {
+	public Controllable(Location loc, Image i) {
 		super(loc, i);
 		camera = new Camera(this);
 	}

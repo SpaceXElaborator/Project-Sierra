@@ -19,7 +19,8 @@ public class Gun extends Weapon {
 
 	public void onLeftClick() {
 		Controllable cont = ProjectSierra.getLauncher().getHandler().getControlledEntity();
-		Projectile p = new Projectile(new ImageIcon(ProjectSierra.class.getResource("Images/Projectiles/Bullet.png")), new Velocity(10, 0), cont.getLocation());
+		Projectile p = new Projectile(((ImageIcon)ProjectSierra.getResources().getObject("Projectiles/Bullit.png")).getImage(), new Velocity(10, 0), cont.getLocation());
+		//Projectile p = new Projectile(new ImageIcon(ProjectSierra.class.getResource("Images/Projectiles/Bullet.png")), new Velocity(10, 0), cont.getLocation());
 		cont.fireProjectile(p);
 	}
 

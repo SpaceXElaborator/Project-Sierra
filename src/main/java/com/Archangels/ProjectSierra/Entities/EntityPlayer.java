@@ -1,9 +1,7 @@
 package com.Archangels.ProjectSierra.Entities;
 
 import java.awt.Image;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import com.Archangels.ProjectSierra.ProjectSierra;
@@ -15,8 +13,9 @@ public class EntityPlayer extends Controllable {
 	
 	private Classes playerClass;
 	
-	public EntityPlayer(Location loc, Classes c) throws IOException {
-		super(loc, new ImageIcon(ImageIO.read(ProjectSierra.class.getResource(c.getImage())).getScaledInstance(64, 128, Image.SCALE_SMOOTH)));
+	public EntityPlayer(Location loc, Classes c) {
+		//super(loc, new ImageIcon(ImageIO.read(ProjectSierra.class.getResource(c.getImage())).getScaledInstance(64, 128, Image.SCALE_SMOOTH)));
+		super(loc, ((ImageIcon)ProjectSierra.getResources().getObject(c.getImage())).getImage().getScaledInstance(64, 128, Image.SCALE_SMOOTH));
 		playerClass = c;
 	}
 	

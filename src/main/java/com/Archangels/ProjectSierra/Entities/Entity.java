@@ -8,8 +8,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-
 import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Block.Block;
 import com.Archangels.ProjectSierra.Engine.GameElement;
@@ -23,7 +21,7 @@ public class Entity implements GameElement {
 
 	private Location loc;
 	private Velocity dir;
-	private ImageIcon i;
+	private Image i;
 	
 	private double gravity = 0.5;
 	private final double MAX_SPEED = 10;
@@ -36,20 +34,21 @@ public class Entity implements GameElement {
 	private Handler handler;
 	private boolean alive;
 	
-	public Entity(Location loc, ImageIcon i) {
+	public Entity(Location loc, Image i) {
 		this.loc = loc;
 		this.dir = new Velocity(0, 0);
 		this.i = i;
 		handler = ProjectSierra.getLauncher().getHandler();
 		
 		cb = new CollisionBox(this);
+		dir.setDirection(Direction.LEFT);
 	}
 	
-	public void setTexture(ImageIcon i) {
+	public void setTexture(Image i) {
 		this.i = i;
 	}
 	
-	public ImageIcon getTexture() {
+	public Image getTexture() {
 		return this.i;
 	}
 	
@@ -82,7 +81,7 @@ public class Entity implements GameElement {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(getTexture().getImage(), (int)getLocation().getX(), (int)getLocation().getY(), null);
+		g.drawImage(getTexture(), (int)getLocation().getX(), (int)getLocation().getY(), null);
 		if(ProjectSierra.isDebug()) {
 			Graphics2D g2d = (Graphics2D)g;
 			g2d.setColor(Color.WHITE);
@@ -100,7 +99,7 @@ public class Entity implements GameElement {
 					if(((Block)ge).isPassable()) {
 						if(fallingThrough) continue;
 					}
-					getLocation().setY(((Block) ge).getLocation().getY() - i.getIconHeight() + 1);
+					getLocation().setY(((Block) ge).getLocation().getY() - i.getHeight(null) + 1);
 					getVelocity().setY(0);
 					//fallingThrough = false;
 					falling = false;
@@ -170,17 +169,16 @@ public class Entity implements GameElement {
 	
 	public void setDirection(Direction dir) {
 		if(getVelocity().getDirection() == dir) return;
-		Image image = i.getImage();
-		BufferedImage img = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		BufferedImage img = new BufferedImage(i.getWidth(null), i.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.createGraphics();
-		g.drawImage(image, 0, 0, null);
+		g.drawImage(i, 0, 0, null);
 		g.dispose();
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-		tx.translate(-image.getWidth(null), 0);
+		tx.translate(-i.getWidth(null), 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		img = op.filter(img, null);
 		
-		i = new ImageIcon(img);
+		i = img;
 		getVelocity().setDirection(dir);
 	}
 	

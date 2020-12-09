@@ -1,8 +1,7 @@
 package com.Archangels.ProjectSierra.Entities.Projectiles;
 
 import java.awt.Graphics;
-
-import javax.swing.ImageIcon;
+import java.awt.Image;
 
 import com.Archangels.ProjectSierra.Engine.GameElement;
 import com.Archangels.ProjectSierra.Entities.Entity;
@@ -13,9 +12,9 @@ public class Projectile extends Entity implements GameElement {
 
 	private Location loc;
 	private Velocity vel;
-	private ImageIcon icon;
+	private Image icon;
 	
-	public Projectile(ImageIcon image, Velocity vel, Location loc) {
+	public Projectile(Image image, Velocity vel, Location loc) {
 		super(loc, image);
 		icon = image;
 		this.vel = vel;
@@ -43,7 +42,7 @@ public class Projectile extends Entity implements GameElement {
 	}
 
 	public void render(Graphics g) {
-		g.drawImage(icon.getImage(), (int)loc.getX(), (int)loc.getY(), null);
+		g.drawImage(icon, (int)loc.getX(), (int)loc.getY(), null);
 	}
 
 	

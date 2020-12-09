@@ -29,7 +29,7 @@ public class Camera implements GameElement {
 	}
 
 	public void update() {
-		int x = (int) ((-cont.getLocation().getX() - (cont.getTexture().getIconWidth()/2)) + 1280/2);
+		int x = (int) ((-cont.getLocation().getX() - (cont.getTexture().getWidth(null)/2)) + 1280/2);
 		int y = (int) (-cont.getLocation().getY() + 720/2);
 		
 		topBounds.setX(x);

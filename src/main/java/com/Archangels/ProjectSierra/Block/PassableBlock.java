@@ -5,6 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import javax.swing.ImageIcon;
+
+import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public class PassableBlock extends Block {
@@ -30,7 +33,11 @@ public class PassableBlock extends Block {
 	public void render(Graphics g) {
 		g.setColor(Color.RED);
 		Graphics2D g2d = (Graphics2D)g;
-		g2d.draw(collision);
+		BlockTextures bt = BlockTextures.valueOf("WOOD_LEDGE");
+		ImageIcon icon = (ImageIcon)ProjectSierra.getResources().getObject(bt.getTexture());
+		g2d.drawImage(icon.getImage(), (int)loc.getX(), (int)loc.getY(), null);
+		if(ProjectSierra.isDebug())
+			g2d.draw(collision);
 	}
 
 	public boolean isPassable() {

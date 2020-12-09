@@ -2,7 +2,8 @@ package com.Archangels.ProjectSierra.Block;
 
 public enum BlockTextures {
 
-	STONE("Stone", "Blocks/Stone.png");
+	STONE("Stone", "Blocks/Stone.png"),
+	WOOD_LEDGE("Wood Ledge", "Blocks/WoodLedge.png");
 	
 	private String name;
 	private String texture;

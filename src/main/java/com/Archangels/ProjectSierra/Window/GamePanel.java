@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -23,7 +22,6 @@ import com.Archangels.ProjectSierra.Entities.EntityPlayer;
 import com.Archangels.ProjectSierra.Entities.Player.Classes;
 import com.Archangels.ProjectSierra.Item.Weapons.Gun;
 import com.Archangels.ProjectSierra.Levels.TestLevel;
-import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public class GamePanel extends GameLoop {
@@ -37,19 +35,13 @@ public class GamePanel extends GameLoop {
 		setPreferredSize(new Dimension(1280, 720));
 		setFocusable(true);
 		
-		EntityPlayer p = null;
+		EntityPlayer p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
 
-		try {
-			p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
-			Gun g = new Gun("Gun", null);
-			p.setMainHand(g);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		Gun g = new Gun("Gun", null);
+		p.setMainHand(g);
+
 		handler.setCamera(p.getCamera());
 		handler.setPlayArea(new PlayArea(p));
-		p.setDirection(Direction.RIGHT);
 		handler.addGameElement(p);
 		handler.setControlledEntity(p);
 		
