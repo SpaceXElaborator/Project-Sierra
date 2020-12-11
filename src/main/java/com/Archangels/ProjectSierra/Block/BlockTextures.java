@@ -1,5 +1,6 @@
 package com.Archangels.ProjectSierra.Block;
 
+// Class to store all blocks textures and their friendly name
 public enum BlockTextures {
 
 	STONE("Stone", "Blocks/Stone.png"),

@@ -31,8 +31,6 @@ public abstract class GameLoop extends JPanel implements Runnable {
 				update();
 				updates++;
 				delta--;
-//				repaint();
-//				frames++;
 			}
 			repaint();
 			frames++;

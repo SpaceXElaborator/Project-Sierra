@@ -8,6 +8,7 @@ import com.Archangels.ProjectSierra.Item.Usable;
 import com.Archangels.ProjectSierra.Util.Location;
 import com.Archangels.ProjectSierra.Util.Velocity;
 
+// A class to represent player controlled objects and how they function
 public abstract class Controllable extends Entity implements ProjectileSource {
 
 	private double movespeed = 5;

@@ -4,6 +4,7 @@ import java.awt.Image;
 
 import com.Archangels.ProjectSierra.Util.Location;
 
+// Will create the behavior of the Enemy's and what will be called to control them
 public abstract class Enemy extends Entity {
 
 	public Enemy(Location loc, Image i) {

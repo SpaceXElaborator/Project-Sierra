@@ -13,8 +13,8 @@ public class EntityPlayer extends Controllable {
 	
 	private Classes playerClass;
 	
+	// Get the image from the ImageBundler and scale to play size
 	public EntityPlayer(Location loc, Classes c) {
-		//super(loc, new ImageIcon(ImageIO.read(ProjectSierra.class.getResource(c.getImage())).getScaledInstance(64, 128, Image.SCALE_SMOOTH)));
 		super(loc, ((ImageIcon)ProjectSierra.getResources().getObject(c.getImage())).getImage().getScaledInstance(64, 128, Image.SCALE_SMOOTH));
 		playerClass = c;
 	}

@@ -8,6 +8,7 @@ import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Entities.Controllable;
 import com.Archangels.ProjectSierra.Entities.Projectiles.Projectile;
 import com.Archangels.ProjectSierra.Item.Weapon;
+import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 import com.Archangels.ProjectSierra.Util.Velocity;
 
@@ -19,8 +20,16 @@ public class Gun extends Weapon {
 
 	public void onLeftClick() {
 		Controllable cont = ProjectSierra.getLauncher().getHandler().getControlledEntity();
-		Projectile p = new Projectile(((ImageIcon)ProjectSierra.getResources().getObject("Projectiles/Bullit.png")).getImage(), new Velocity(10, 0), cont.getLocation());
-		//Projectile p = new Projectile(new ImageIcon(ProjectSierra.class.getResource("Images/Projectiles/Bullet.png")), new Velocity(10, 0), cont.getLocation());
+		
+		Velocity v = null;
+		
+		if(cont.getVelocity().getDirection() == Direction.LEFT) {
+			v = new Velocity(-10, 0);
+		} else {
+			v = new Velocity(10, 0);
+		}
+		
+		Projectile p = new Projectile(((ImageIcon)ProjectSierra.getResources().getObject("Projectiles/Bullet.png")).getImage(), v, cont.getLocation());
 		cont.fireProjectile(p);
 	}
 

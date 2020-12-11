@@ -17,6 +17,7 @@ import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 import com.Archangels.ProjectSierra.Util.Velocity;
 
+// The basic class for any living object in the game
 public class Entity implements GameElement {
 
 	private Location loc;
@@ -34,6 +35,8 @@ public class Entity implements GameElement {
 	private Handler handler;
 	private boolean alive;
 	
+	// loc = Starting location
+	// i = Image to be represented on the screen at the given location
 	public Entity(Location loc, Image i) {
 		this.loc = loc;
 		this.dir = new Velocity(0, 0);
@@ -65,23 +68,29 @@ public class Entity implements GameElement {
 	}
 	
 	public void update() {
+		// Move the entity each frame by the vector stored in the velocity
 		getLocation().setX(getLocation().getX() + getVelocity().getX());
 		getLocation().setY(getLocation().getY() + getVelocity().getY());
 		
+		// Check for if the block they are on is air
 		if(!isOnSolidBlock()) {
 			falling = true;
 		}
 		
+		// Create fake gravity to drop the entity at a given speed
 		if(falling || jumping) {
 			getVelocity().setY(getVelocity().getY() + gravity);
 			if(getVelocity().getY() > MAX_SPEED) getVelocity().setY(MAX_SPEED);
 		}
 		
+		// Check for top/bottom/left/right collisions of the entity
 		CheckCollision();
 	}
 	
 	public void render(Graphics g) {
 		g.drawImage(getTexture(), (int)getLocation().getX(), (int)getLocation().getY(), null);
+		
+		// Draw collision boxes
 		if(ProjectSierra.isDebug()) {
 			Graphics2D g2d = (Graphics2D)g;
 			g2d.setColor(Color.WHITE);
@@ -101,7 +110,6 @@ public class Entity implements GameElement {
 					}
 					getLocation().setY(((Block) ge).getLocation().getY() - i.getHeight(null) + 1);
 					getVelocity().setY(0);
-					//fallingThrough = false;
 					falling = false;
 					jumping = false;
 					return true;
@@ -167,18 +175,23 @@ public class Entity implements GameElement {
 		return handler;
 	}
 	
+	// Flip the image on the X axis to either left or right depending on the way they are traveling
 	public void setDirection(Direction dir) {
 		if(getVelocity().getDirection() == dir) return;
+		
+		// Created a buffered image and paint the image onto its surface
 		BufferedImage img = new BufferedImage(i.getWidth(null), i.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.createGraphics();
 		g.drawImage(i, 0, 0, null);
 		g.dispose();
+		
+		// Keep the scale but flip it on the X axis
 		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
 		tx.translate(-i.getWidth(null), 0);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		img = op.filter(img, null);
 		
-		i = img;
+		//Set the image
+		i = op.filter(img, null);
 		getVelocity().setDirection(dir);
 	}
 	
