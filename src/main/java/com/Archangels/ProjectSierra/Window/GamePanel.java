@@ -20,7 +20,7 @@ import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseEvents;
 import com.Archangels.ProjectSierra.Engine.Mouse.GameMouseListener;
 import com.Archangels.ProjectSierra.Entities.EntityPlayer;
 import com.Archangels.ProjectSierra.Entities.Player.Classes;
-import com.Archangels.ProjectSierra.Item.Weapons.Gun;
+import com.Archangels.ProjectSierra.Item.Weapons.Sword_1;
 import com.Archangels.ProjectSierra.Levels.TestLevel;
 import com.Archangels.ProjectSierra.Util.Location;
 
@@ -35,9 +35,12 @@ public class GamePanel extends GameLoop {
 		setPreferredSize(new Dimension(1280, 720));
 		setFocusable(true);
 		
+		new TestLevel(handler);
+		
 		EntityPlayer p = new EntityPlayer(new Location(200, 200), Classes.KNIGHT);
 
-		Gun g = new Gun("Gun", null);
+		//Gun g = new Gun("Gun", (ImageIcon)ProjectSierra.getResources().getObject("Blocks/stone.png"));
+		Sword_1 g = new Sword_1("Short Sword");
 		p.setMainHand(g);
 
 		handler.setCamera(p.getCamera());
@@ -48,8 +51,6 @@ public class GamePanel extends GameLoop {
 		addMouseMotionListener(gme);
 		addMouseListener(new GameMouseListener());
 		new Thread(this).start();
-		
-		new TestLevel(handler);
 
 		setFocusTraversalKeysEnabled(false);
 	}
