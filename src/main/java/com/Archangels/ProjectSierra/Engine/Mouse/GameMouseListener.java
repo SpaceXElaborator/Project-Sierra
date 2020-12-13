@@ -5,6 +5,7 @@ import java.awt.event.MouseListener;
 
 import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Engine.Handler;
+import com.Archangels.ProjectSierra.Item.Usable;
 
 public class GameMouseListener implements MouseListener {
 	
@@ -33,12 +34,14 @@ public class GameMouseListener implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) {
 			if(handler.getControlledEntity().getMainHand() != null)
-				handler.getControlledEntity().getMainHand().onLeftClick();
+				if(handler.getControlledEntity().getMainHand() instanceof Usable)
+					((Usable) handler.getControlledEntity().getMainHand()).onLeftClick();
 		}
 		
 		if(e.getButton() == MouseEvent.BUTTON3) {
 			if(handler.getControlledEntity().getMainHand() != null)
-				handler.getControlledEntity().getMainHand().onRightClick();
+				if(handler.getControlledEntity().getMainHand() instanceof Usable)
+					((Usable) handler.getControlledEntity().getMainHand()).onRightClick();
 		}
 	}
 	
