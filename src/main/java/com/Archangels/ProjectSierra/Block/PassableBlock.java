@@ -3,7 +3,6 @@ package com.Archangels.ProjectSierra.Block;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -11,21 +10,9 @@ import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public class PassableBlock extends Block {
-
-	private Location loc;
-	private Rectangle collision;
 	
-	public PassableBlock(Location loc) {
-		this.loc = loc;
-		collision = new Rectangle((int)loc.getX(), (int)loc.getY(), 40, 15);
-	}
-	
-	public Location getLocation() {
-		return loc;
-	}
-	
-	public Rectangle getCollision() {
-		return collision;
+	public PassableBlock(Location loc, int x, int y) {
+		super(loc, x ,y);
 	}
 	
 	public void update() {}
@@ -35,12 +22,16 @@ public class PassableBlock extends Block {
 		Graphics2D g2d = (Graphics2D)g;
 		BlockTextures bt = BlockTextures.valueOf("WOOD_LEDGE");
 		ImageIcon icon = (ImageIcon)ProjectSierra.getResources().getObject(bt.getTexture());
-		g2d.drawImage(icon.getImage(), (int)loc.getX(), (int)loc.getY(), null);
+		g2d.drawImage(icon.getImage(), (int)getLocation().getX(), (int)getLocation().getY(), null);
 		if(ProjectSierra.isDebug())
-			g2d.draw(collision);
+			g2d.draw(getCollision());
 	}
 
 	public boolean isPassable() {
+		return true;
+	}
+
+	public boolean walkable() {
 		return true;
 	}
 	

@@ -3,7 +3,6 @@ package com.Archangels.ProjectSierra.Block;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -11,21 +10,9 @@ import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Util.Location;
 
 public class BasicGround extends Block {
-
-	private Location loc;
-	private Rectangle collision;
 	
 	public BasicGround(Location loc) {
-		this.loc = loc;
-		collision = new Rectangle((int)loc.getX(), (int)loc.getY(), 40, 40);
-	}
-	
-	public Location getLocation() {
-		return loc;
-	}
-	
-	public Rectangle getCollision() {
-		return collision;
+		super(loc, 40, 40);
 	}
 	
 	public void update() {}
@@ -35,13 +22,17 @@ public class BasicGround extends Block {
 		Graphics2D g2d = (Graphics2D)g;
 		BlockTextures bt = BlockTextures.valueOf("STONE");
 		ImageIcon icon = (ImageIcon)ProjectSierra.getResources().getObject(bt.getTexture());
-		g2d.drawImage(icon.getImage(), (int)loc.getX(), (int)loc.getY(), null);
+		g2d.drawImage(icon.getImage(), (int)getLocation().getX(), (int)getLocation().getY(), null);
 		if(ProjectSierra.isDebug())
-			g2d.draw(collision);
+			g2d.draw(getCollision());
 	}
 
 	public boolean isPassable() {
 		return false;
+	}
+
+	public boolean walkable() {
+		return true;
 	}
 	
 }
