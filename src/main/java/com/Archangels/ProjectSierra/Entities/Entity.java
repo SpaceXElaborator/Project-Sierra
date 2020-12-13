@@ -8,11 +8,14 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
+
 import com.Archangels.ProjectSierra.ProjectSierra;
 import com.Archangels.ProjectSierra.Block.Block;
 import com.Archangels.ProjectSierra.Engine.GameElement;
 import com.Archangels.ProjectSierra.Engine.Handler;
 import com.Archangels.ProjectSierra.Entities.Collision.CollisionBox;
+import com.Archangels.ProjectSierra.Item.Item;
 import com.Archangels.ProjectSierra.Util.Direction;
 import com.Archangels.ProjectSierra.Util.Location;
 import com.Archangels.ProjectSierra.Util.Velocity;
@@ -31,6 +34,9 @@ public class Entity implements GameElement {
 	private boolean jumping = false;
 	private boolean fallingThrough = false;
 	
+	private Item mainHandItem;
+	private Item offHandItem;
+	
 	private CollisionBox cb;
 	private Handler handler;
 	private boolean alive;
@@ -44,7 +50,7 @@ public class Entity implements GameElement {
 		handler = ProjectSierra.getLauncher().getHandler();
 		
 		cb = new CollisionBox(this);
-		dir.setDirection(Direction.LEFT);
+		dir.setDirection(Direction.RIGHT);
 	}
 	
 	public void setTexture(Image i) {
@@ -88,7 +94,8 @@ public class Entity implements GameElement {
 	}
 	
 	public void render(Graphics g) {
-		g.drawImage(getTexture(), (int)getLocation().getX(), (int)getLocation().getY(), null);
+		
+		drawDirection(g, getVelocity().getDirection());
 		
 		// Draw collision boxes
 		if(ProjectSierra.isDebug()) {
@@ -105,6 +112,7 @@ public class Entity implements GameElement {
 		for(GameElement ge : handler.getGameElements()) {
 			if(ge instanceof Block) {
 				if(getCollisionBox().getBoundsBottom().intersects(((Block) ge).getCollision())) {
+					if(!((Block) ge).walkable()) continue;
 					if(((Block)ge).isPassable()) {
 						if(fallingThrough) continue;
 					}
@@ -119,6 +127,22 @@ public class Entity implements GameElement {
 			}
 		}
 		return false;
+	}
+	
+	public Item getMainHand() {
+		return mainHandItem;
+	}
+	
+	public void setMainHand(Item u) {
+		mainHandItem = u;
+	}
+	
+	public Item getOffHandItem() {
+		return offHandItem;
+	}
+	
+	public void setOffHandItem(Item u) {
+		offHandItem = u;
 	}
 	
 	private void CheckCollision() {
@@ -176,23 +200,49 @@ public class Entity implements GameElement {
 	}
 	
 	// Flip the image on the X axis to either left or right depending on the way they are traveling
-	public void setDirection(Direction dir) {
-		if(getVelocity().getDirection() == dir) return;
+	private void drawDirection(Graphics g, Direction dir) {
 		
-		// Created a buffered image and paint the image onto its surface
-		BufferedImage img = new BufferedImage(i.getWidth(null), i.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.createGraphics();
-		g.drawImage(i, 0, 0, null);
-		g.dispose();
-		
-		// Keep the scale but flip it on the X axis
-		AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-		tx.translate(-i.getWidth(null), 0);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		
-		//Set the image
-		i = op.filter(img, null);
-		getVelocity().setDirection(dir);
+		if(dir == Direction.RIGHT) {
+			if(mainHandItem != null)
+				g.drawImage(((ImageIcon)ProjectSierra.getResources().getObject(mainHandItem.getTexture())).getImage(), (int)getLocation().getX() + 50, (int)getLocation().getY() + 50, null);
+			g.drawImage(getTexture(), (int)getLocation().getX(), (int)getLocation().getY(), null);
+			if(offHandItem != null)
+				g.drawImage(((ImageIcon)ProjectSierra.getResources().getObject(offHandItem.getTexture())).getImage(), (int)getLocation().getX() + 10, (int)getLocation().getY() + 50, null);
+		} else {
+			// Create a new image canvas to draw the player too
+			BufferedImage img = new BufferedImage(i.getWidth(null), i.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+			Graphics big = img.createGraphics();
+			big.drawImage(i, 0, 0, null);
+			big.dispose();
+			// Keep the scale but flip it on the X axis
+			AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+			tx.translate(-i.getWidth(null), 0);
+			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+			
+			if(mainHandItem != null) {
+				BufferedImage img2 = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				Graphics g3 = img2.getGraphics();
+				g3.drawImage(((ImageIcon)ProjectSierra.getResources().getObject(mainHandItem.getTexture())).getImage(), 0, 0, null);
+				g3.dispose();
+				AffineTransform tx2 = AffineTransform.getScaleInstance(-1, 1);
+				tx2.translate(-32, 0);
+				AffineTransformOp op2 = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+				g.drawImage(op2.filter(img2, null), (int)getLocation().getX() - 50, (int)getLocation().getY() + 50, null);
+			}
+			
+			g.drawImage(op.filter(img, null), (int)getLocation().getX(), (int)getLocation().getY(), null);
+			
+			if(offHandItem != null) {
+				BufferedImage img2 = new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB);
+				Graphics g3 = img2.getGraphics();
+				g3.drawImage(((ImageIcon)ProjectSierra.getResources().getObject(offHandItem.getTexture())).getImage(), 0, 0, null);
+				g3.dispose();
+				AffineTransform tx2 = AffineTransform.getScaleInstance(-1, 1);
+				tx2.translate(-32, 0);
+				AffineTransformOp op2 = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+				g.drawImage(op2.filter(img2, null), (int)getLocation().getX() - 10, (int)getLocation().getY() + 50, null);
+			}
+		}
 	}
 	
 	public Velocity getVelocity() {
