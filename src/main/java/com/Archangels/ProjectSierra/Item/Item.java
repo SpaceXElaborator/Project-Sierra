@@ -1,23 +1,19 @@
 package com.Archangels.ProjectSierra.Item;
 
-import javax.swing.ImageIcon;
-
-import com.Archangels.ProjectSierra.Engine.GameElement;
-
-public abstract class Item implements GameElement {
+public abstract class Item {
 	
 	private String name;
-	private ImageIcon texture;
+	private String texture;
 
-	public Item(String s, ImageIcon j) {
+	public Item(String s, String j) {
 		texture = j;
 	}
 
-	public void setTexture(ImageIcon j) {
+	public void setTexture(String j) {
 		texture = j;
 	}
 
-	public ImageIcon getTexture() {
+	public String getTexture() {
 		return texture;
 	}
 	

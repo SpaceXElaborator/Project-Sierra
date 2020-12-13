@@ -1,12 +1,10 @@
 package com.Archangels.ProjectSierra.Item;
 
-import javax.swing.ImageIcon;
-
 public abstract class Weapon extends Item implements Usable {
 
 	private boolean ammo;
 	
-	public Weapon(String s, ImageIcon j) {
+	public Weapon(String s, String j) {
 		super(s, j);
 	}
 
