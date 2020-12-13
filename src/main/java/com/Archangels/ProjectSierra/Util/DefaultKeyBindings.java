@@ -33,7 +33,7 @@ public class DefaultKeyBindings {
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
-					con.setDirection(Direction.LEFT);
+					con.getVelocity().setDirection(Direction.LEFT);
 					con.getVelocity().setX(-con.getMoveSpeed());
 				}
 			}
@@ -46,7 +46,7 @@ public class DefaultKeyBindings {
 			public void actionPerformed(ActionEvent e) {
 				if(handler.getControlledEntity() != null) {
 					Controllable con = (Controllable)handler.getControlledEntity();
-					con.setDirection(Direction.RIGHT);
+					con.getVelocity().setDirection(Direction.RIGHT);
 					con.getVelocity().setX(con.getMoveSpeed());
 				}
 			}
@@ -105,6 +105,12 @@ public class DefaultKeyBindings {
 					Controllable con = (Controllable)handler.getControlledEntity();
 					if(con.isJumping()) return;
 					if(con.isFalling()) return;
+					con.setFallingThrough(true);
+					ProjectSierra.getScheduler().schedule(new Runnable() {
+						public void run() {
+							con.setFallingThrough(false);
+						}
+					}, 300, TimeUnit.MILLISECONDS);
 					con.setJumping(true);
 					con.getVelocity().setY(-15);
 				}
